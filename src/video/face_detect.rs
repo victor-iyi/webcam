@@ -19,18 +19,12 @@ pub fn face_detection(haarcascade_path: &str) -> Result<()> {
 
   #[cfg(ocvrs_opencv_branch_32)]
   let (xml, mut cam) = (
-    // "/usr/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml".to_owned(),
     haarcascade_path.to_owned(),
     videoio::VideoCapture::new(0, videoio::CAP_ANY)?, // 0 is the default camera.
   );
   #[cfg(not(ocvrs_opencv_branch_32))]
   let (xml, mut cam) = (
-    core::find_file(
-      // "haarcascades/haarcascade_frontalface_alt.xml",
-      haarcascade_path,
-      true,
-      false,
-    )?,
+    core::find_file(haarcascade_path, true, false)?,
     videoio::VideoCapture::new(0, videoio::CAP_ANY)?,
   );
 
